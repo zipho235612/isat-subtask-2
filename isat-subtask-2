@@ -1,0 +1,37 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+string decToBin(int n){
+    string b="";
+    do{ b = char((n%2)+'0')+b; n/=2; }while(n>0);
+    return b;
+}
+int binToDec(string b){
+    int d=0; for(char c:b) d=d*2+(c-'0'); return d;
+}
+string decToHex(int n){
+    string h=""; char x[]="0123456789ABCDEF";
+    do{ h=x[n%16]+h; n/=16; }while(n>0);
+    return h;
+}
+int hexToDec(string h){
+    int d=0; for(char c:h){
+        if(c>='0'&&c<='9') d=d*16+(c-'0');
+        else d=d*16+(toupper(c)-'A'+10);
+    } return d;
+}
+
+int main(){
+    srand(time(0)); int ch;
+    do{
+        cout<<"\n1.Dec->Bin 2.Bin->Dec 3.Hex->Dec 4.Dec->Hex 5.Demo 6.Exit\nChoice: ";
+        cin>>ch;
+        if(ch==1){int n;cin>>n;cout<<decToBin(n)<<endl;}
+        else if(ch==2){string b;cin>>b;cout<<binToDec(b)<<endl;}
+        else if(ch==3){string h;cin>>h;cout<<hexToDec(h)<<endl;}
+        else if(ch==4){int n;cin>>n;cout<<decToHex(n)<<endl;}
+        else if(ch==5){int r=rand()%100;cout<<r<<" -> "<<decToBin(r)<<endl;}
+    }while(ch!=6);
+}
